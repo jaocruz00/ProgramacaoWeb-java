@@ -8,11 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class AgendamentoDAO{
+public class AgendamentoDAO {
 
-    /*
-     Salvar novo agendamento
-    */
     public String inserir(Agendamento a) {
 
         try {
@@ -43,9 +40,6 @@ public class AgendamentoDAO{
         }
     }
 
-    /*
-     Lista todos os agendamentos
-    */
     public ArrayList<Agendamento> listar() {
 
         ArrayList<Agendamento> lista =
@@ -94,9 +88,6 @@ public class AgendamentoDAO{
         return lista;
     }
 
-    /*
-     Verifica se horário está ocupado
-    */
     public boolean horarioOcupado(
             String data,
             String horario) {

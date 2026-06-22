@@ -1,139 +1,47 @@
 <%@page import="VO.Cliente"%>
-
-<%
-
-Cliente c =
-(Cliente)request.getAttribute("cliente");
-
-%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Editar Cliente</title>
 </head>
-
 <body>
+<center>
+    <h1>Editar Cliente</h1>
 
-<h2>Editar Cliente</h2>
+    <%
+        Cliente c = (Cliente) request.getAttribute("cliente");
+    %>
 
-<form action="ClienteController?op=4" method="post">
+    <% if (c != null) { %>
+    <form method="post" action="ClienteController?op=4">
 
-<input
-type="hidden"
-name="id"
-value="<%=c.getId()%>">
+        <input type="hidden" name="id" value="<%= c.getId() %>">
 
-Nome:
+        Nome: <input type="text" name="nome" value="<%= c.getNome() %>" required><br><br>
 
-<br>
+        Telefone: <input type="text" name="telefone" value="<%= c.getTelefone() %>"><br><br>
 
-<input
-type="text"
-name="nome"
-value="<%=c.getNome()%>">
+        CPF: <input type="text" name="cpf" value="<%= c.getCpf() %>" required><br><br>
 
-<br><br>
+        Tipo de A√ß√£o: <input type="text" name="tipoAcao" value="<%= c.getTipoAcao() %>"><br><br>
 
-Telefone:
+        Status do Processo:
+        <select name="status">
+            <option value="Em andamento" <%= "Em andamento".equals(c.getStatus()) ? "selected" : "" %>>Em andamento</option>
+            <option value="Conclu√≠do" <%= "Conclu√≠do".equals(c.getStatus()) ? "selected" : "" %>>Conclu√≠do</option>
+            <option value="Aguardando documentos" <%= "Aguardando documentos".equals(c.getStatus()) ? "selected" : "" %>>Aguardando documentos</option>
+        </select><br><br>
 
-<br>
+        <input type="submit" value="Salvar Altera√ß√µes">
+    </form>
+    <% } else { %>
+        <p>Cliente n√£o encontrado.</p>
+    <% } %>
 
-<input
-type="text"
-name="telefone"
-value="<%=c.getTelefone()%>">
-
-<br><br>
-
-CPF:
-
-<br>
-
-<input
-type="text"
-name="cpf"
-value="<%=c.getCpf()%>">
-
-<br><br>
-
-Tipo de AÁ„o:
-
-<br>
-
-<select name="tipoAcao">
-
-<option
-<%=c.getTipoAcao().equals("Judicial")?"selected":""%>>
-Judicial
-</option>
-
-<option
-<%=c.getTipoAcao().equals("Extra Judicial")?"selected":""%>>
-Extra Judicial
-</option>
-
-<option
-<%=c.getTipoAcao().equals("INSS")?"selected":""%>>
-INSS
-</option>
-
-<option
-<%=c.getTipoAcao().equals("Recurso de Multa")?"selected":""%>>
-Recurso de Multa
-</option>
-
-<option
-<%=c.getTipoAcao().equals("Trabalhista")?"selected":""%>>
-Trabalhista
-</option>
-
-</select>
-
-<br><br>
-
-Status:
-
-<br>
-
-<select name="status">
-
-<option
-<%=c.getStatus().equals("Em andamento")?"selected":""%>>
-Em andamento
-</option>
-
-<option
-<%=c.getStatus().equals("Fase 1")?"selected":""%>>
-Fase 1
-</option>
-
-<option
-<%=c.getStatus().equals("Fase 2")?"selected":""%>>
-Fase 2
-</option>
-
-<option
-<%=c.getStatus().equals("Fase 3")?"selected":""%>>
-Fase 3
-</option>
-
-<option
-<%=c.getStatus().equals("ConcluÌdo")?"selected":""%>>
-ConcluÌdo
-</option>
-
-</select>
-
-<br><br>
-
-<input
-type="submit"
-value="Salvar AlteraÁıes">
-
-</form>
-
+    <br>
+    <a href="index.html">P√°gina Inicial</a>
+</center>
 </body>
 </html>

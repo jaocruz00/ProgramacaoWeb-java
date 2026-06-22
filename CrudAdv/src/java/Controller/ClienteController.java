@@ -28,6 +28,8 @@ public class ClienteController extends HttpServlet {
             /*
              CADASTRAR
              op=1
+             MODO DEBUG: não captura mais a exceção aqui — ela sobe
+             e o Tomcat mostra o stack trace completo na tela.
             */
             case 1 -> {
 
@@ -48,15 +50,15 @@ public class ClienteController extends HttpServlet {
                 c.setStatus(
                         request.getParameter("status"));
 
-                response.sendRedirect(
-                        "resultado.jsp?result="
-                        + dao.inserir(c));
+                try {
+                    String resultado = dao.inserir(c);
+                    response.sendRedirect("resultado.jsp?result=" + resultado);
+                } catch (Exception e) {
+                    throw new ServletException(
+                        "FALHA AO INSERIR CLIENTE — causa real: " + e.toString(), e);
+                }
             }
 
-            /*
-             LISTAR
-             op=2
-            */
             case 2 -> {
 
                 request.setAttribute(
@@ -70,10 +72,6 @@ public class ClienteController extends HttpServlet {
                 rd.forward(request, response);
             }
 
-            /*
-             BUSCAR PARA EDIÇÃO
-             op=3
-            */
             case 3 -> {
 
                 int id =
@@ -91,10 +89,6 @@ public class ClienteController extends HttpServlet {
                 rd.forward(request, response);
             }
 
-            /*
-             ALTERAR
-             op=4
-            */
             case 4 -> {
 
                 Cliente c = new Cliente();
@@ -123,10 +117,6 @@ public class ClienteController extends HttpServlet {
                         + dao.alterar(c));
             }
 
-            /*
-             EXCLUIR
-             op=5
-            */
             case 5 -> {
 
                 int id =

@@ -10,42 +10,29 @@ import java.util.ArrayList;
 
 public class ClienteDAO {
 
-    /*
-     Inserir cliente no banco
-    */
-    public String inserir(Cliente c) {
+    public String inserir(Cliente c) throws Exception {
 
-        try {
+        Connection con = new Conexao().getConexao();
 
-            Connection con = new Conexao().getConexao();
+        String sql = "INSERT INTO cliente "
+                + "(nome, telefone, cpf, tipo_acao, status_processo) "
+                + "VALUES (?, ?, ?, ?, ?)";
 
-            String sql = "INSERT INTO cliente "
-                    + "(nome, telefone, cpf, tipo_acao, status_processo) "
-                    + "VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement ps = con.prepareStatement(sql);
 
-            PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, c.getNome());
+        ps.setString(2, c.getTelefone());
+        ps.setString(3, c.getCpf());
+        ps.setString(4, c.getTipoAcao());
+        ps.setString(5, c.getStatus());
 
-            ps.setString(1, c.getNome());
-            ps.setString(2, c.getTelefone());
-            ps.setString(3, c.getCpf());
-            ps.setString(4, c.getTipoAcao());
-            ps.setString(5, c.getStatus());
+        ps.execute();
 
-            ps.execute();
+        con.close();
 
-            con.close();
-
-            return "Cliente cadastrado com sucesso";
-
-        } catch (Exception e) {
-
-            return "Erro ao cadastrar cliente";
-        }
+        return "Cliente cadastrado com sucesso";
     }
 
-    /*
-     Listar todos os clientes
-    */
     public ArrayList<Cliente> listar() {
 
         ArrayList<Cliente> lista = new ArrayList<>();
@@ -70,8 +57,7 @@ public class ClienteDAO {
                 c.setCpf(rs.getString("cpf"));
                 c.setTipoAcao(rs.getString("tipo_acao"));
                 c.setStatus(rs.getString("status_processo"));
-                c.setUltimaAlteracao(
-                        rs.getString("ultima_alteracao"));
+                c.setUltimaAlteracao(rs.getString("ultima_alteracao"));
 
                 lista.add(c);
             }
@@ -79,15 +65,12 @@ public class ClienteDAO {
             con.close();
 
         } catch (Exception e) {
-
+            System.err.println("Erro ao listar clientes: " + e.getMessage());
         }
 
         return lista;
     }
 
-    /*
-     Buscar cliente pelo ID
-    */
     public Cliente buscar(int id) {
 
         Cliente c = new Cliente();
@@ -117,15 +100,12 @@ public class ClienteDAO {
             con.close();
 
         } catch (Exception e) {
-
+            System.err.println("Erro ao buscar cliente: " + e.getMessage());
         }
 
         return c;
     }
 
-    /*
-     Atualizar cliente
-    */
     public String alterar(Cliente c) {
 
         try {
@@ -157,14 +137,10 @@ public class ClienteDAO {
             return "Cliente atualizado com sucesso";
 
         } catch (Exception e) {
-
             return "Erro ao atualizar cliente";
         }
     }
 
-    /*
-     Excluir cliente
-    */
     public String excluir(int id) {
 
         try {
@@ -184,7 +160,6 @@ public class ClienteDAO {
             return "Cliente removido com sucesso";
 
         } catch (Exception e) {
-
             return "Erro ao remover cliente";
         }
     }

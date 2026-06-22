@@ -1,26 +1,16 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Resultado</title>
 </head>
-
 <body>
-
-<h2>Resultado da Operação</h2>
-
-<p>
-
-<%=request.getParameter("result")%>
-
-</p>
-
-<br>
-
-<a href="index.html">
-Menu Principal
-</a>
-
+<center>
+    <h1>Resultado da OperaÃ§Ã£o</h1>
+    <h2><%= request.getParameter("result") %></h2>
+    <br><br>
+    <a href="index.html">PÃ¡gina Inicial</a>
+</center>
 </body>
 </html>

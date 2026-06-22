@@ -1,101 +1,36 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro Cliente</title>
+    <title>Cadastrar Cliente</title>
 </head>
-
 <body>
+<center>
+    <h1>Cadastro de Cliente</h1>
 
-<h2>Cadastro de Cliente</h2>
+    <form method="post" action="ClienteController?op=1">
 
-<form action="ClienteController?op=1" method="post">
+        Nome: <input type="text" name="nome" required><br><br>
 
-Nome:
+        Telefone: <input type="text" name="telefone"><br><br>
 
-<br>
+        CPF: <input type="text" name="cpf" required><br><br>
 
-<input
-type="text"
-name="nome"
-required>
+        Tipo de AÃ§Ã£o: <input type="text" name="tipoAcao"><br><br>
 
-<br><br>
+        Status do Processo:
+        <select name="status">
+            <option value="Em andamento">Em andamento</option>
+            <option value="ConcluÃ­do">ConcluÃ­do</option>
+            <option value="Aguardando documentos">Aguardando documentos</option>
+        </select><br><br>
 
-Telefone:
+        <input type="submit" value="Cadastrar">
+    </form>
 
-<br>
-
-<input
-type="text"
-name="telefone"
-required>
-
-<br><br>
-
-CPF:
-
-<br>
-
-<input
-type="text"
-name="cpf"
-required>
-
-<br><br>
-
-Tipo de Ação:
-
-<br>
-
-<select name="tipoAcao">
-
-<option>Judicial</option>
-
-<option>Extra Judicial</option>
-
-<option>INSS</option>
-
-<option>Recurso de Multa</option>
-
-<option>Trabalhista</option>
-
-</select>
-
-<br><br>
-
-Status:
-
-<br>
-
-<select name="status">
-
-<option>Em andamento</option>
-
-<option>Fase 1</option>
-
-<option>Fase 2</option>
-
-<option>Fase 3</option>
-
-<option>Concluído</option>
-
-</select>
-
-<br><br>
-
-<input
-type="submit"
-value="Cadastrar">
-
-</form>
-
-<br>
-
-<a href="index.html">
-Voltar
-</a>
-
+    <br>
+    <a href="index.html">PÃ¡gina Inicial</a>
+</center>
 </body>
 </html>

@@ -1,143 +1,49 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="VO.Agendamento"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html>
-
+<html lang="pt-BR">
 <head>
-
-<meta charset="UTF-8">
-
-<title>Agenda</title>
-
+    <meta charset="UTF-8">
+    <title>Agenda de Atendimento</title>
 </head>
-
 <body>
+<center>
+    <h1>Agenda de Atendimento</h1>
 
-<h2>Agenda de Atendimento</h2>
+    <h2>Novo Agendamento</h2>
+    <form method="post" action="AgendamentoController?op=1">
+        Data: <input type="date" name="data" required><br><br>
+        Hor√°rio: <input type="time" name="horario" required><br><br>
+        Descri√ß√£o:<br>
+        <textarea name="descricao" rows="4" cols="40"></textarea><br><br>
+        <input type="submit" value="Agendar">
+    </form>
 
-<form action="AgendamentoController?op=1"
-      method="post">
+    <br><br>
+    <h2>Agendamentos</h2>
 
-Data:
+    <%
+        ArrayList<Agendamento> agenda = (ArrayList<Agendamento>) request.getAttribute("agenda");
 
-<br>
+        if (agenda != null && !agenda.isEmpty()) {
+            out.print("<table border='1' width='80%' cellpadding='5' cellspacing='0'>");
+            out.print("<tr><th>Data</th><th>Hor√°rio</th><th>Descri√ß√£o</th></tr>");
+            for (Agendamento a : agenda) {
+                out.print("<tr>");
+                out.print("<td>" + a.getData()      + "</td>");
+                out.print("<td>" + a.getHorario()   + "</td>");
+                out.print("<td>" + a.getDescricao() + "</td>");
+                out.print("</tr>");
+            }
+            out.print("</table>");
+        } else {
+            out.print("<p>Nenhum agendamento cadastrado.</p>");
+        }
+    %>
 
-<input type="date"
-       name="data"
-       required>
-
-<br><br>
-
-Hor·rio:
-
-<br>
-
-<select name="horario">
-
-<option>08:00:00</option>
-
-<option>09:00:00</option>
-
-<option>10:00:00</option>
-
-<option>11:00:00</option>
-
-<option>14:00:00</option>
-
-<option>15:00:00</option>
-
-<option>16:00:00</option>
-
-<option>17:00:00</option>
-
-</select>
-
-<br><br>
-
-DescriÁ„o:
-
-<br>
-
-<input type="text"
-       name="descricao"
-       required>
-
-<br><br>
-
-<input type="submit"
-       value="Agendar">
-
-</form>
-
-<hr>
-
-<h3>Hor·rios Ocupados</h3>
-
-<table border="1">
-
-<tr>
-
-<th>Data</th>
-
-<th>Hor·rio</th>
-
-<th>DescriÁ„o</th>
-
-</tr>
-
-<%
-
-ArrayList<Agendamento> agenda =
-(ArrayList<Agendamento>)
-request.getAttribute("agenda");
-
-if(agenda != null){
-
-for(Agendamento a : agenda){
-
-%>
-
-<tr bgcolor="#ff9999">
-
-<td>
-<%=a.getData()%>
-</td>
-
-<td>
-<%=a.getHorario()%>
-</td>
-
-<td>
-<%=a.getDescricao()%>
-</td>
-
-</tr>
-
-<%
-}
-}
-%>
-
-</table>
-
-<br>
-
-<a href="AgendamentoController?op=2">
-
-Atualizar Agenda
-
-</a>
-
-<br><br>
-
-<a href="index.html">
-
-Voltar ao Menu
-
-</a>
-
+    <br><br>
+    <a href="index.html">P√°gina Inicial</a>
+</center>
 </body>
-
 </html>
