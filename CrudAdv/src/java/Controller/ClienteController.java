@@ -67,7 +67,7 @@ public class ClienteController extends HttpServlet {
 
                 RequestDispatcher rd =
                         request.getRequestDispatcher(
-                                "/listar_clientes.jsp");
+                                "/listar_cliente.jsp");
 
                 rd.forward(request, response);
             }

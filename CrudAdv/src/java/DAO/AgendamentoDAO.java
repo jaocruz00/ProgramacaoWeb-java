@@ -18,8 +18,8 @@ public class AgendamentoDAO {
 
             String sql =
                     "INSERT INTO agendamento "
-                    + "(data_atendimento, horario, descricao) "
-                    + "VALUES (?, ?, ?)";
+                    + "(data_atendimento, horario, descricao, cliente_id) "
+                    + "VALUES (?, ?, ?, ?)";
 
             PreparedStatement ps =
                     con.prepareStatement(sql);
@@ -27,6 +27,7 @@ public class AgendamentoDAO {
             ps.setString(1, a.getData());
             ps.setString(2, a.getHorario());
             ps.setString(3, a.getDescricao());
+            ps.setInt(4, a.getClienteId());
 
             ps.execute();
 
@@ -75,6 +76,9 @@ public class AgendamentoDAO {
 
                 a.setDescricao(
                         rs.getString("descricao"));
+
+                a.setClienteId(
+                        rs.getInt("cliente_id"));
 
                 lista.add(a);
             }

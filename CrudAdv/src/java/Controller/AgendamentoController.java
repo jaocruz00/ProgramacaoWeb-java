@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.AgendamentoDAO;
+import DAO.ClienteDAO;
 import VO.Agendamento;
 
 import java.io.IOException;
@@ -45,6 +46,10 @@ public class AgendamentoController
                 a.setDescricao(
                         request.getParameter("descricao"));
 
+                a.setClienteId(
+                        Integer.parseInt(
+                                request.getParameter("clienteId")));
+
                 if (dao.horarioOcupado(
                         a.getData(),
                         a.getHorario())) {
@@ -68,6 +73,10 @@ public class AgendamentoController
                 request.setAttribute(
                         "agenda",
                         dao.listar());
+
+                request.setAttribute(
+                        "clientes",
+                        new ClienteDAO().listar());
 
                 RequestDispatcher rd =
                         request.getRequestDispatcher(

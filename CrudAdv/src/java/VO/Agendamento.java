@@ -1,9 +1,8 @@
-
 package VO;
-/*
+
 /*
  Classe responsável por armazenar
- os dados dos agendamentos.
+ os dados do agendamento.
 */
 public class Agendamento {
 
@@ -11,6 +10,7 @@ public class Agendamento {
     private String data;
     private String horario;
     private String descricao;
+    private int clienteId;
 
     public int getId() {
         return id;
@@ -42,5 +42,13 @@ public class Agendamento {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
     }
 }
